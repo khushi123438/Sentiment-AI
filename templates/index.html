@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sentiment AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <main class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <div class="ai-icon">
+                ✦
+            </div>
+
+            <div>
+                <p class="badge">AI • NLP</p>
+
+                <h1>
+                    Sentiment
+                    <span>AI</span>
+                </h1>
+
+                <p class="subtitle">
+                    Understand the emotion behind your words
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Input Card -->
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Analyze Text</h2>
+
+                    <p>
+                        Enter a sentence or review to detect its sentiment.
+                    </p>
+                </div>
+
+                <div class="status">
+                    <span></span>
+                    Model Online
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+                <div class="textarea-wrapper">
+
+                    <textarea
+                        name="text"
+                        placeholder="Type something like: I absolutely love this product..."
+                        required
+                    >{{ text }}</textarea>
+
+                    <div class="textarea-footer">
+                        <span>Powered by NLP</span>
+                        <span class="counter">Text Analysis</span>
+                    </div>
+
+                </div>
+
+
+                <button type="submit">
+
+                    <span class="button-icon">✦</span>
+
+                    Analyze Sentiment
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Result -->
+        {% if sentiment %}
+
+        <div class="result-card">
+
+            <div class="result-header">
+                <div>
+                    <p class="result-label">ANALYSIS RESULT</p>
+                    <h2>Your sentiment is</h2>
+                </div>
+
+                <div class="result-icon">
+                    ✦
+                </div>
+            </div>
+
+
+            <div class="result-main">
+
+                <div class="sentiment-box">
+
+                    {% if sentiment == "Positive" %}
+                        <div class="emoji">😊</div>
+                    {% else %}
+                        <div class="emoji">😞</div>
+                    {% endif %}
+
+                    <div>
+
+                        <p class="small-label">
+                            DETECTED SENTIMENT
+                        </p>
+
+                        <div class="sentiment">
+                            {{ sentiment }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="confidence">
+
+                    <div class="confidence-top">
+
+                        <span>Confidence Score</span>
+
+                        <strong>
+                            {{ confidence }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width: {{ confidence }}%"
+                        ></div>
+                    </div>
+
+                    <p>
+                        The model is {{ confidence }}% confident in this prediction.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Footer -->
+
+        <footer>
+            <span>Sentiment AI</span>
+            <span>•</span>
+            <span>Machine Learning</span>
+            <span>•</span>
+            <span>NLP</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>
